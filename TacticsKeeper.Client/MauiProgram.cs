@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MudBlazor.Services;
 
 namespace TacticsKeeper.Client
 {
@@ -20,6 +21,8 @@ namespace TacticsKeeper.Client
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddMudServices(); // Add MudBlazor services
 
             return builder.Build();
         }
