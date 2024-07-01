@@ -5,6 +5,7 @@ namespace TacticsKeeper.Shared.Models
 {
     public class Unit
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public int Movement { get; set; } = 0;
         public int Strength { get; set; } = 1;

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TacticsKeeper.Client", "TacticsKeeper.Client\TacticsKeeper.Client.csproj", "{CF74734B-DCF2-4FE2-8D85-DD01DABB24AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TacticsKeeper.MAUI", "TacticsKeeper.MAUI\TacticsKeeper.MAUI.csproj", "{CF74734B-DCF2-4FE2-8D85-DD01DABB24AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TacticsKeeper.Shared", "TacticsKeeper.Shared\TacticsKeeper.Shared.csproj", "{AE6C0231-33DC-4090-A456-B6283903F5DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TacticsKeeper.Shared", "TacticsKeeper.Shared\TacticsKeeper.Shared.csproj", "{AE6C0231-33DC-4090-A456-B6283903F5DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

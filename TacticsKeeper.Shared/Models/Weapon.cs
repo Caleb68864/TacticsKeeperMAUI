@@ -6,6 +6,7 @@ namespace TacticsKeeper.Shared.Models
 {
     public class Weapon
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Range = 0;
         public int MinAttacks = 1;  // Minimum number of attacks
@@ -16,7 +17,12 @@ namespace TacticsKeeper.Shared.Models
         public int Damage = 1;
         public int AttackMultiplier = 1; // Multiplier for the number of attacks
         public int AttackModifier = 1; // Modifier for the number of attacks
+
+        // Foreign key
+        public int UnitId { get; set; }
+
         private List<Modifier> Modifiers = new List<Modifier>();
+
 
         public Weapon() { }
 

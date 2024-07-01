@@ -1,0 +1,107 @@
+﻿@page "/createunit"
+@using TacticsKeeper.Shared.Models
+@using TacticsKeeper.Shared.Services
+@using MudBlazor
+@inject UnitService UnitService
+
+<PageTitle>Create Unit</PageTitle>
+
+<MudContainer>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Typo="Typo.h4">Create a New Unit</MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudTextField @bind-Value="newUnit.Name" Label="Name" Variant="Variant.Outlined" Required="true" RequiredError="Name is required" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudNumericField @bind-Value="newUnit.Movement" Label="Movement" Variant="Variant.Outlined" Min="0" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudNumericField @bind-Value="newUnit.Strength" Label="Strength" Variant="Variant.Outlined" Min="0" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudNumericField @bind-Value="newUnit.Toughness" Label="Toughness" Variant="Variant.Outlined" Min="0" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudNumericField @bind-Value="newUnit.Wounds" Label="Wounds" Variant="Variant.Outlined" Min="0" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudNumericField @bind-Value="newUnit.Leadership" Label="Leadership" Variant="Variant.Outlined" Min="0" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudNumericField @bind-Value="newUnit.Save" Label="Save" Variant="Variant.Outlined" Min="0" />
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudNumericField @bind-Value="newUnit.InvulnerableSave" Label="Invulnerable Save" Variant="Variant.Outlined" Min="0" />
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudButton OnClick="AddUnit" Variant="Variant.Filled" Color="Color.Primary" Disabled="@string.IsNullOrWhiteSpace(newUnit.Name)">Add Unit</MudButton>
+        </MudItem>
+    </MudGrid>
+
+    <MudDivider />
+
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Typo="Typo.h5">Created Units</MudText>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTable Items="units" Hover="true">
+                <HeaderContent>
+                    <MudTh>Name</MudTh>
+                    <MudTh>Movement</MudTh>
+                    <MudTh>Strength</MudTh>
+                    <MudTh>Toughness</MudTh>
+                    <MudTh>Wounds</MudTh>
+                    <MudTh>Leadership</MudTh>
+                    <MudTh>Save</MudTh>
+                    <MudTh>Invulnerable Save</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Name">@context.Name</MudTd>
+                    <MudTd DataLabel="Movement">@context.Movement</MudTd>
+                    <MudTd DataLabel="Strength">@context.Strength</MudTd>
+                    <MudTd DataLabel="Toughness">@context.Toughness</MudTd>
+                    <MudTd DataLabel="Wounds">@context.Wounds</MudTd>
+                    <MudTd DataLabel="Leadership">@context.Leadership</MudTd>
+                    <MudTd DataLabel="Save">@context.Save</MudTd>
+                    <MudTd DataLabel="Invulnerable Save">@context.InvulnerableSave</MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private Unit newUnit = new Unit();
+    private List<Unit> units = new List<Unit>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        units = await UnitService.GetItemsAsync();
+    }
+
+    private async Task AddUnit()
+    {
+        if (!string.IsNullOrWhiteSpace(newUnit.Name))
+        {
+            await UnitService.SaveItemAsync(new Unit
+                {
+                    Name = newUnit.Name,
+                    Movement = newUnit.Movement,
+                    Strength = newUnit.Strength,
+                    Toughness = newUnit.Toughness,
+                    Wounds = newUnit.Wounds,
+                    Leadership = newUnit.Leadership,
+                    Save = newUnit.Save,
+                    InvulnerableSave = newUnit.InvulnerableSave
+                });
+
+            units = await UnitService.GetItemsAsync(); // Refresh the unit list
+            newUnit = new Unit(); // Reset the form
+        }
+    }
+}
